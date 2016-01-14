@@ -1,4 +1,23 @@
-﻿<!DOCTYPE html>
+﻿<?php 
+if(isset($_POST['submit'])){
+    $to = "ericf712@gmail.com"; // this is your Email address
+    $from = $_POST['email']; // this is the sender's Email address
+    $name = $_POST['name'];
+    $subject = "Your email is on its way!";
+    $subject2 = "Copy of your email";
+    $message = $name . " wrote:" . "\n\n" . $_POST['message'];
+    $message2 = "Here's a copy of your message " . $name . "\n\n" . $_POST['message'];
+
+    $headers = "From:" . $from;
+    $headers2 = "From:" . $to;
+    mail($to,$subject,$message,$headers);
+    mail($from,$subject2,$message2,$headers2); // sends a copy of the message to the sender
+    echo "Email Sent. Thanks " . $name . ", we'll reach out to you soon!";
+    // You can also use header('Location: thank_you.php'); to redirect to another page.
+    }
+?>
+
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -331,8 +350,7 @@
 
            <div class="row set-row-pad"  data-scroll-reveal="enter from the bottom after 0.5s" >
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <form method="POST" name="SampleForm" action="http://www.socraticprep.com/formmail.php">
-                        <input type="hidden" name="recipients" value="ericf712@gmail.com" />
+                    <form method="post" action="">
                         <div class="form-group">
                             <input type="text" class="form-control" name="name" required="required" placeholder="Your Name" />
                         </div>
@@ -343,7 +361,7 @@
                             <textarea class="form-control" name="message" style="min-height: 150px;" required="required" placeholder="Message"></textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-info btn-block btn-lg" name="submit">EMAIL</button>
+                            <button type="submit" class="btn btn-info btn-block btn-lg" name="submit" value="Submit">EMAIL</button>
                         </div>
 
                     </form>
