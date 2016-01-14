@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html>
+﻿<?php
+if($_POST["submit"]) {
+    $recipient="ericf712@gmail.com";
+    $subject="Socratic Prep Inquiry";
+    $sender=$_POST["name"];
+    $senderEmail=$_POST["email"];
+    $message=$_POST["message"];
+
+    $mailBody="Name: $sender\nEmail: $senderEmail\n\n$message";
+
+    mail($recipient, $subject, $mailBody, "From: $sender <$senderEmail>");
+
+    $thankYou="<p>Thank you! Your message has been sent.</p>";
+}
+?>
+
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -328,32 +344,29 @@
 
              </div>
              <!--/.HEADER LINE END-->
+
            <div class="row set-row-pad"  data-scroll-reveal="enter from the bottom after 0.5s" >
-                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <form id ="fr1">
-                        <!-- <div class="form-group">
-                            <input type="text" class="form-control " id="tb1" required="required" placeholder="Your Name" />
+                <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                    <form method="POST" name="contactform" action="index.html">
+                        <div class="form-group">
+                            <input type="text" class="form-control " name="name" required="required" placeholder="Your Name" />
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control " id="tb2" required="required"  placeholder="Your Email" />
+                            <input type="text" class="form-control " name="email" required="required"  placeholder="Your Email" />
                         </div>
                         <div class="form-group">
-                            <textarea name="message" required="required" id="tb3" class="form-control" style="min-height: 150px;" placeholder="Message"></textarea>
-                        </div> -->
+                            <textarea required="required" name="message" class="form-control" style="min-height: 150px;" placeholder="Message"></textarea>
+                        </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-info btn-block btn-lg" id="bt1" value="click">EMAIL</button>
+                            <button type="submit" class="btn btn-info btn-block btn-lg" name="submit">EMAIL</button>
                         </div>
 
                     </form>
                 </div>
+            </div>
+            
 
-                   
-     
-              
-              
-                
-               </div>
-                </div>
+            </div>
           </div> 
        </div>
      <div class="container">

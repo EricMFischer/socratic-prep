@@ -13,15 +13,6 @@
 (function ($) {
     "use strict";
 
-    $(document).ready(function() {
-        $('#bt1').click(function() {
-            $('#fr1').attr('action',
-                           'mailto:ericf712@gmail.com?subject=' +
-                           $('#tb1').val() + $('#tb2').val() + '&body=' + $('#tb3').val());
-            $('#fr1').submit();
-        });
-    });
-
     var mainApp = {
         scrollAnimation_fun: function () {
 
