@@ -331,46 +331,22 @@
 
            <div class="row set-row-pad"  data-scroll-reveal="enter from the bottom after 0.5s" >
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                    <?php
-                    $action=$_REQUEST['action'];
-                    if ($action=="")    /* display the contact form */
-                        {
-                        ?>
-                    <form action="" method="POST" enctype="multipart/form-data">
+
+                    <form action="contact.php" method="post">
                         <input type="hidden" name="action" value="submit">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="name" id="name" required="required" placeholder="Your Name" />
+                            <input type="text" class="form-control" name="name" required="required" placeholder="Your Name" />
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="email" id="email" required="required"  placeholder="Your Email" />
+                            <input type="text" class="form-control" name="email" required="required"  placeholder="Your Email" />
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" name="message" id="message" style="min-height: 150px;" required="required" placeholder="Message"></textarea>
+                            <textarea class="form-control" name="message" style="min-height: 150px;" required="required" placeholder="Message"></textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-info btn-block btn-lg" name="submit" value="Send email">EMAIL</button>
+                            <button type="submit" class="btn btn-info btn-block btn-lg" name="submit" value="Send">EMAIL</button>
                         </div>
-
                     </form>
-                        <?php
-                        } 
-                    else                /* send the submitted data */
-                        {
-                        $name=$_REQUEST['name'];
-                        $email=$_REQUEST['email'];
-                        $message=$_REQUEST['message'];
-                        if (($name=="")||($email=="")||($message==""))
-                            {
-                            echo "All fields are required, please fill <a href=\"\">the form</a> again.";
-                            }
-                        else{        
-                            $from="From: $name<$email>\r\nReturn-path: $email";
-                            $subject="Message sent using your contact form";
-                            mail("ericf712@gmail.com", $subject, $message, $from);
-                            echo "Email sent!";
-                            }
-                        }  
-                    ?>
                 </div>
             </div>
             
@@ -424,14 +400,5 @@
     <script src="/js/jquery.easing.min.js"></script>
     <!--  Custom Scripts --> 
          <script src="/js/custom.js"></script>
-
-         <script>
-           var makeEmail = function() {
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            var message = document.getElementById("message").value;
-            return sendEmail(name, email, message);
-           }
-         </script>
 </body>
 </html>
