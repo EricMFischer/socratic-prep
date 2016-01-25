@@ -1,22 +1,4 @@
-﻿<?php
-$field_name = $_POST['name'];
-$field_email = $_POST['email'];
-$field_message = $_POST['message'];
-
-$mail_to = 'ericf712@gmail.com';
-$subject = 'Message from '.$field_name;
-
-$body_message = 'From: '.$field_name."\n";
-$body_message .= 'Email: '.$field_email."\n";
-$body_message .= 'Message: '.$field_message;
-
-$headers = 'From: '.$field_email."\r\n";
-$headers .= 'Reply To: '.$field_email."\r\n";
-
-$mail_status = mail($mail_to, $subject, $body_message, $headers);
-?>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -347,21 +329,47 @@ $mail_status = mail($mail_to, $subject, $body_message, $headers);
              </div>
              <!--/.HEADER LINE END-->
 
+          <script>
+            var sendEmail = function() {
+              var name = document.getElementById('name').value;
+              var email = document.getElementById('email').value;
+              var message = document.getElementById('message').value;
+              var userInformation = {name: name, email: email, message: message};
+              console.log(userInformation);
+              var xhttp = new XMLHttpRequest();
+              if (!xhttp) {
+                console.log('Cannot create an XMLHTTP instance');
+                return false;
+              }
+              xhttp.open('POST','/userData', false);
+              xhttp.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+              xhttp.send(userInformation);
+              
+              if(xhttp.responseText === 'FAILURE'){
+                console.log('Sorry, there was a problem. Please email me directly at ericf712@gmail.com.');
+              }
+              if(xhttp.responseText === 'SUCCESS'){
+                // window.location.href = 'http://www.socraticprep.com/';
+                alert('Message sent!');
+              }
+            }
+          </script>
+
            <div class="row set-row-pad"  data-scroll-reveal="enter from the bottom after 0.5s" >
                 <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
 
-                    <form action="" method="post">
+                    <form onsubmit="sendEmail()">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="name" required="required" placeholder="Your Name" />
+                            <input type="text" class="form-control" id="name" required="required" placeholder="Your Name" />
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="email" required="required"  placeholder="Your Email" />
+                            <input type="text" class="form-control" id="email" required="required"  placeholder="Your Email" />
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" name="message" style="min-height: 150px;" required="required" placeholder="Message"></textarea>
+                            <textarea class="form-control" id="message" style="min-height: 150px;" required="required" placeholder="Message"></textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-info btn-block btn-lg" name="submit" value="Send">EMAIL</button>
+                            <button type="submit" class="btn btn-info btn-block btn-lg" name="submit">EMAIL</button>
                         </div>
                     </form>
                 </div>
